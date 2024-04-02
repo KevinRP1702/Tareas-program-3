@@ -1,3 +1,4 @@
+import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Font;
 
@@ -10,12 +11,13 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JLabel;
 
 public class Ventana {
 
 	private JFrame frame;
 	public boolean turno = true;
-	int movimientos;
+	int movimientos, contX, contO;
 	public JButton btnNewButton;
 	public JButton btnNewButton_2;
 	public JButton btnNewButton_3;
@@ -52,17 +54,21 @@ public class Ventana {
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	JPanel panel_1 = new JPanel();
+	JLabel lblGanadasO = new JLabel("O = 0");
+	JLabel lblGanadasX = new JLabel("X = 0");
+	
 	private void initialize() {
 		frame = new JFrame("TIc Tac Toe");
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 457, 395);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
-		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(0, 0, 434, 261);
+		
+		panel_1.setBounds(0, 52, 434, 261);
 		frame.getContentPane().add(panel_1);
 		panel_1.setLayout(new GridLayout(3, 3, 0, 0));
-
+		
 
 		btnNewButton = new JButton("");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -188,6 +194,27 @@ public class Ventana {
 		});
 
 		panel_1.add(btnNewButton_9);
+		
+		JButton btnReiniciar = new JButton("Reiniciar");
+		btnReiniciar.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnReiniciar.setBounds(0, 309, 441, 36);
+		btnReiniciar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				reinicio();
+			}
+		});
+		frame.getContentPane().add(btnReiniciar);
+		
+		lblGanadasX.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblGanadasX.setBounds(88, 21, 46, 14);
+		frame.getContentPane().add(lblGanadasX);
+		
+		lblGanadasO.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblGanadasO.setBounds(257, 17, 64, 24);
+		frame.getContentPane().add(lblGanadasO);
 		}
 
 	public void click(JButton btnClick) {
@@ -200,52 +227,66 @@ public class Ventana {
 			btnClick.setText("O");
 			turno = true;
 		}
+		btnClick.setFocusable(false);
 		ganador();
 	}
 
 	public void ganador() {
 		if(btnNewButton.getText() == "O" && btnNewButton_2.getText()== "O" && btnNewButton_3.getText()== "O" || btnNewButton_4.getText() == "O" && btnNewButton_5.getText()== "O" && btnNewButton_6.getText()== "O" || btnNewButton_7.getText() == "O" && btnNewButton_8.getText()== "O" && btnNewButton_9.getText()== "O") {
-			 JOptionPane.showMessageDialog(null,"Gana el jugador O", "Ganador",JOptionPane.ERROR_MESSAGE);
-			 System.exit(0);
+			JOptionPane.showMessageDialog(null,"Gana el jugador O", "Ganador",JOptionPane.ERROR_MESSAGE);
+			 contO++;
 		}
 		if(btnNewButton.getText() == "X" && btnNewButton_2.getText()== "X" && btnNewButton_3.getText()== "X" || btnNewButton_4.getText() == "X" && btnNewButton_5.getText()== "X" && btnNewButton_6.getText()== "X" || btnNewButton_7.getText() == "X" && btnNewButton_8.getText()== "X" && btnNewButton_9.getText()== "X") {
-			 JOptionPane.showMessageDialog(null,"Gana el jugador X", "Ganador",JOptionPane.ERROR_MESSAGE);
-			 System.exit(0);
+			JOptionPane.showMessageDialog(null,"Gana el jugador X", "Ganador",JOptionPane.ERROR_MESSAGE);
+			 contX++;
 		}
 		if(btnNewButton.getText() == "O" && btnNewButton_4.getText()== "O" && btnNewButton_7.getText()== "O" || btnNewButton_2.getText() == "O" && btnNewButton_5.getText()== "O" && btnNewButton_8.getText()== "O" || btnNewButton_3.getText() == "O" && btnNewButton_6.getText()== "O" && btnNewButton_9.getText()== "O") {
-			 JOptionPane.showMessageDialog(null,"Gana el jugador O", "Ganador",JOptionPane.ERROR_MESSAGE);
-			 System.exit(0);
+			JOptionPane.showMessageDialog(null,"Gana el jugador O", "Ganador",JOptionPane.ERROR_MESSAGE);
+			 contO++;
 		}
 		if(btnNewButton.getText() == "X" && btnNewButton_4.getText()== "X" && btnNewButton_7.getText()== "X" || btnNewButton_2.getText() == "X" && btnNewButton_5.getText()== "X" && btnNewButton_8.getText()== "X" || btnNewButton_3.getText() == "X" && btnNewButton_6.getText()== "X" && btnNewButton_9.getText()== "X") {
-			 JOptionPane.showMessageDialog(null,"Gana el jugador X", "Ganador",JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null,"Gana el jugador X", "Ganador",JOptionPane.ERROR_MESSAGE);
 			 System.exit(0);
+			 contX++;
 		}
 
 		if(btnNewButton.getText() == "O" && btnNewButton_5.getText() == "O" && btnNewButton_9.getText() == "O") {
-			 JOptionPane.showMessageDialog(null,"Gana el jugador O", "Ganador",JOptionPane.ERROR_MESSAGE);
-			 System.exit(0);
+			JOptionPane.showMessageDialog(null,"Gana el jugador O", "Ganador",JOptionPane.ERROR_MESSAGE);
+			 contO++;
 		}
 
 		if(btnNewButton.getText() == "X" && btnNewButton_5.getText() == "X" && btnNewButton_9.getText() == "X") {
-			 JOptionPane.showMessageDialog(null,"Gana el jugador X", "Ganador",JOptionPane.ERROR_MESSAGE);
-			 System.exit(0);
+			JOptionPane.showMessageDialog(null,"Gana el jugador X", "Ganador",JOptionPane.ERROR_MESSAGE);
+			 contX++;
 		}
 
 		if(btnNewButton_3.getText() == "O" && btnNewButton_5.getText() == "O" && btnNewButton_7.getText() == "O") {
-			 JOptionPane.showMessageDialog(null,"Gana el jugador O", "Ganador",JOptionPane.ERROR_MESSAGE);
-			 System.exit(0);
+			JOptionPane.showMessageDialog(null,"Gana el jugador O", "Ganador",JOptionPane.ERROR_MESSAGE);
+			 contO++;
 		}
 
 		if(btnNewButton_3.getText() == "X" && btnNewButton_5.getText() == "X" && btnNewButton_7.getText() == "X") {
-			 JOptionPane.showMessageDialog(null,"Gana el jugador X", "Ganador", JOptionPane.ERROR_MESSAGE);
-			 System.exit(0);
+			JOptionPane.showMessageDialog(null,"Gana el jugador X", "Ganador", JOptionPane.ERROR_MESSAGE);
+			contX++;
 		}
 
 		if(movimientos == 9) {
-			JOptionPane.showMessageDialog(null,"Ningún jugador ganó", "Empate",
-	                JOptionPane.ERROR_MESSAGE);
-			 		System.exit(0);
+			JOptionPane.showMessageDialog(null,"Ningún jugador ganó", "Empate", JOptionPane.ERROR_MESSAGE);	
+		}
+		
+		lblGanadasX.setText("X = " + contX);
+		lblGanadasO.setText("O = " + contO);
+	}
+	
+	public void reinicio () {
+		Component[] elementos = panel_1.getComponents();
+		for(int i = 0; i <elementos.length; i++) {
+			if(elementos[i].getClass().toString().equals("class javax.swing.JButton")) {
+				JButton btn = ((JButton) elementos[i]);
+				btn.setEnabled(true);
+				btn.setText("");
+				movimientos = 0;
+			}
 		}
 	}
-
 }
